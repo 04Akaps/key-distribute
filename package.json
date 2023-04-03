@@ -1,0 +1,19 @@
+{
+  "name": "distribute_key",
+  "version": "1.0.0",
+  "description": "Typescript를 활용한 키 분산",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/app.js",
+    "dev": "nodemon --watch \"src/**/*.ts\" --ext \"ts,json\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1"
+  }
+}
