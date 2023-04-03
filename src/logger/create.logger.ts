@@ -5,7 +5,7 @@ import * as path from "path";
 
 const logLevel = LogLevel.DEBUG || LogLevel.INFO;
 const logFilesDir = path.join(__dirname, "/logs");
-console.log(logFilesDir);
+
 const logOutput = [
   new winston.transports.Console(),
 
