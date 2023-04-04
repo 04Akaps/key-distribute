@@ -1,0 +1,4 @@
+2023-04-04 20:15:38.1538 HTTP request.logger.ts "::1 - - PostmanRuntime/7.31.3 GET /test HTTP/1.1 404 143 3.866 ms"
+2023-04-04 20:15:53.1553 HTTP request.logger.ts "::1 - - PostmanRuntime/7.31.3 GET /test HTTP/1.1 404 143 3.473 ms"
+2023-04-04 20:16:09.169 HTTP request.logger.ts "::1 - - PostmanRuntime/7.31.3 POST /test HTTP/1.1 404 144 0.630 ms"
+2023-04-04 20:16:17.1617 HTTP request.logger.ts "::1 - - PostmanRuntime/7.31.3 POST /test/api/sample HTTP/1.1 200 42 13.945 ms"
