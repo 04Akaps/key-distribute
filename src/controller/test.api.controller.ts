@@ -6,12 +6,8 @@ import {
 } from "../types/extensions/express.extension";
 
 export const sampleApi = async (req: ExpressRequest, res: ExpressResponse) => {
-  //   await SampleApiRequest.validate(req);
-
-  console.log("req", req);
-
+  await SampleApiRequest.validate(req);
   const request = new SampleApiRequest(req);
-  console.log(request);
   const response = new SampleApiResponse(request.name);
   return response.send(res);
 };

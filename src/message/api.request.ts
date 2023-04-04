@@ -5,7 +5,7 @@ import { InvalidParameterError } from "./api.error";
 
 export class ApiRequest {
   static async validateProperties(
-    req: Request,
+    req: ExpressRequest,
     validations: ValidationChain[]
   ) {
     // execute express-validator chains
