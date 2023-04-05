@@ -23,4 +23,6 @@ export const createWallet = async (
   );
 
   console.log(checkWalletBalance);
+
+  //   const shared
 };

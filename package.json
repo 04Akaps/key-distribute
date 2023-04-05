@@ -20,6 +20,7 @@
     "@types/winston": "^2.4.4",
     "ethers": "5.7.2",
     "nodemon": "^2.0.22",
+    "secrets.js-grempe": "^2.0.0",
     "ts-node": "^10.9.1"
   },
   "dependencies": {
