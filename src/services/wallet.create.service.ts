@@ -1,10 +1,10 @@
-import { utils, ethers, Signer, Wallet as WalletSigner } from "ethers";
+import { ethers, Wallet } from "ethers";
 
 export const createNewWallet = async () => {
   const entropy = ethers.utils.randomBytes(16);
   // getRandom Bytes
 
-  const wallet = WalletSigner.createRandom(entropy);
+  const wallet = Wallet.createRandom(entropy);
   // Create Random
 
   return {
