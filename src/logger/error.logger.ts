@@ -29,7 +29,7 @@ const errorHandler = (
   }
 
   // 로그 찍어주고
-  logger.error("unknown server error,", err);
+  logger.error("알수 없는 서버 에러,", err);
   const response = new ErrorResponse(ApiStatus.FAILED, err.message);
   return response.send(res, HttpStatus.INTERNAL_SERVER_ERROR);
 };

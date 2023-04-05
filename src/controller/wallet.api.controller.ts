@@ -42,10 +42,7 @@ export const createWallet = async (
   return response.send(res);
 };
 
-export const recoverPrivateKey = async (
-  req: ExpressRequest,
-  res: ExpressResponse
-) => {
+export const recoverPk = async (req: ExpressRequest, res: ExpressResponse) => {
   const recoverRequest = new PkRecoveryRequest(req);
 
   // 해당 과정에서는 이제 req에 있는 snsId를 기준으로 다른 서비스에서 추가적인 Material을 가져 와야 한다.

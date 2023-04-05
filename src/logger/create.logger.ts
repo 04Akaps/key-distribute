@@ -13,7 +13,7 @@ const logOutput = [
     filename: `${logFilesDir}/%DATE%.log`,
     datePattern: "YYYY-MM-DD",
     zippedArchive: true,
-    maxSize: "2048m",
+    maxSize: "2400m",
   }),
 ];
 

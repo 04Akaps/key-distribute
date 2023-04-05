@@ -5,7 +5,7 @@ export class SampleApiResponse extends SuccessResponse {
 
   constructor(name: string) {
     super();
-    this.greeting = `hello, ${name}`;
+    this.greeting = `Test, ${name}`;
   }
 
   static Schema = class extends SuccessResponse.Schema {
@@ -17,7 +17,7 @@ export class SampleApiResponse extends SuccessResponse {
 
         greeting: {
           type: "string",
-          description: "Greeting Message from Username",
+          description: "Username",
         },
       };
     }

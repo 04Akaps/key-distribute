@@ -19,11 +19,11 @@ export class WalletCreateSuccessResponse extends SuccessResponse {
 
         shares: {
           type: "string",
-          description: "encrypted shares to be store of this account",
+          description: "first Material",
         },
         address: {
           type: "string",
-          description: "address of this account",
+          description: "address ",
         },
       };
     }
@@ -47,7 +47,7 @@ export class PkRecoveryResponse extends SuccessResponse {
 
         pk: {
           type: "string",
-          description: "private key of requested account in requested chain",
+          description: "Pk",
         },
       };
     }

@@ -17,7 +17,7 @@ export class SampleApiRequest extends ApiRequest {
   }
 
   static validations: ValidationChain[] = [
-    body("name").notEmpty().withMessage("name is required"),
+    body("name").notEmpty().withMessage("name Error"),
   ];
 
   static Schema = class extends ApiRequest.Schema {
@@ -29,7 +29,7 @@ export class SampleApiRequest extends ApiRequest {
 
         name: {
           type: "string",
-          description: "Sample Username",
+          description: "Username",
           required: true,
         },
       };

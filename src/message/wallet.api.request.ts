@@ -60,8 +60,8 @@ export class PkRecoveryRequest extends ApiRequest {
   }
 
   static validations: ValidationChain[] = [
-    body("sns_id").notEmpty().withMessage("id is required"),
-    body("chain_id").notEmpty().withMessage("chain_id is required"),
+    body("sns_id").notEmpty().withMessage("id Error"),
+    body("chain_id").notEmpty().withMessage("chain_id Error"),
   ];
 
   static Schema = class extends ApiRequest.Schema {
@@ -73,12 +73,12 @@ export class PkRecoveryRequest extends ApiRequest {
 
         userId: {
           type: "bigint",
-          description: "Unique user id for wallet creation request",
+          description: "userId",
           required: true,
         },
         chainId: {
           type: "int",
-          description: "Requested blockchain to create user's wallet on",
+          description: "chainId",
           required: true,
         },
       };

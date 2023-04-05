@@ -1,13 +1,13 @@
-import "./global.variables";
+import "./config/global.variables";
 import "express-async-errors";
 
 import express, { Express } from "express";
-import startServer from "./server.start";
+import startServer from "./config/server.start";
 import requestLogger from "./logger/request.logger";
 import corsHandler from "./cors/cors.handle";
 import errorHandler from "./logger/error.logger";
 import { testRouter, walletRouter } from "./router/index";
-import { decryptAndRestoreKey, distributeAndEncryptoKey } from "./services";
+import { distributeAndEncryptoKey } from "./services";
 
 const app: Express = express();
 const port = parseInt(global.server_port || "80");
