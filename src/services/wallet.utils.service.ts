@@ -60,9 +60,26 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
     };
   });
 
-  // 이제 해당 값에서 4개를 소유
-  const material_ = encrypShares.slice(0, threshold); // Take the first 4 shares
+  // 법적으로 키에 대한 보관을 피해가기 위해서는 해당 키를 분산화 시켜야 한다.
+  // 그러기 떄문에 실제 서비스 에서는 각각의 material을 따로 보관을 해야 한다.
+  // 예를들면 AWS같은 클라우드 서비스에...!!
+
+  // 그 후 서명을 할떄 기준값을 통해서 값을 모두 가져와서, 해당 값들을 다시 합쳐서 PrivateKey를 가져오면
+  // 키 분산화 로직이 완료된다.
+
+  // 아래에 있는 로직은 Aws에 키를 저장하고, 후에 가져와서 Parse하는 로직
+  const material_ = encrypShares.slice(0, 2); // Take the first 4 shares
+  const secondMaterial = encrypShares.slice(2, 4);
+
   const stringFyMaterial = JSON.stringify(material_);
+  const stringFySecondMaterial = JSON.stringify(secondMaterial);
+
+  const parseOne = JSON.parse(stringFyMaterial);
+  const parseTwo = JSON.parse(stringFySecondMaterial);
+
+  const newMaterial = [...parseOne, ...parseTwo];
+
+  decryptAndRestoreKey(JSON.stringify(newMaterial));
 
   return stringFyMaterial;
 };
