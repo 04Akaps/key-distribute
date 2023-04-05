@@ -11,12 +11,3 @@ export const sampleApi = async (req: ExpressRequest, res: ExpressResponse) => {
   const response = new SampleApiResponse(request.name);
   return response.send(res);
 };
-
-// export const sampleDataApi = async (
-//   req: ExpressRequest,
-//   res: ExpressResponse
-// ) => {
-//   const result = await sampleDataService.getSampleData();
-//   const response = new SampleDataApiResponse(result);
-//   return response.send(res);
-// };
