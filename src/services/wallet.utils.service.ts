@@ -37,17 +37,16 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
   const encrypShares = shareArray.map((share) => {
     // 해당 값은 배열로 나오기 떄문에 각각의 값에 대해서 PBKDF2를 사용하여 직렬화 실행
 
-    const iv = crypto.randomBytes(12); // 랜덤 값 생성
+    const iv = crypto.randomBytes(16); // 랜덤 값 생성
 
     // 해당 값을 암호화
     // PBKDF2는 입력된 값에 대해서 여러번 반복해서 보안성이 높은 키를 생성
     // createCipheriv는 키, 알고리즘, 랜덤 값을 통해서 인스턴스를 생성
 
     const ci = crypto.createCipheriv(
-      "aes-256-ccm",
+      "aes-256-cbc",
       crypto.pbkdf2Sync(PASSWORD, SALT, ITERATIONS, KEYLEN, DIGEST),
-      iv,
-      { authTagLength: 16 }
+      iv
     );
 
     // 암호화를 수행
@@ -66,4 +65,29 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
   const stringFyMaterial = JSON.stringify(material_);
 
   return stringFyMaterial;
+};
+
+export const decryptAndRestoreKey = async (source: string) => {
+  const material = JSON.parse(source);
+
+  const decryptedShares = material.map((share) => {
+    const iv = Buffer.from(share.iv, "hex");
+
+    const decipher = crypto.createDecipheriv(
+      "aes-256-cbc",
+      crypto.pbkdf2Sync(PASSWORD, SALT, ITERATIONS, KEYLEN, DIGEST),
+      iv
+    );
+
+    let decrypted = decipher.update(share.encrypShares, "hex", "utf8");
+
+    decrypted += decipher.final("utf8");
+
+    return decrypted;
+  });
+
+  const keyHex = ss.combine(decryptedShares);
+  const decrypt = ss.hex2str(keyHex);
+
+  return decrypt; // return Private Key
 };
