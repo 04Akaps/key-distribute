@@ -53,3 +53,31 @@ export class PkRecoveryResponse extends SuccessResponse {
     }
   };
 }
+
+export class TransactionSignResponse extends SuccessResponse {
+  txReceipt: string;
+
+  constructor(txReceipt: string) {
+    super();
+    this.txReceipt = txReceipt;
+  }
+
+  static Schema = class extends SuccessResponse.Schema {
+    constructor() {
+      super();
+
+      this.properties = {
+        ...this.properties,
+
+        txReceipt: {
+          type: "string",
+          description: "encrypted shares to be store of this account",
+        },
+        address: {
+          type: "string",
+          description: "address of this account",
+        },
+      };
+    }
+  };
+}

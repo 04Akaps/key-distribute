@@ -20,6 +20,10 @@ export const getWeb3Instance = (): Web3 => {
   return new Web3(INFURA_URL);
 };
 
+export const getWeb3InstanceByUrl = (url: string): Web3 => {
+  return new Web3(url);
+};
+
 export const getWalletBalance = async (address: string): Promise<number> => {
   const web3Client = getWeb3Instance();
   const weiBalance = await web3Client.eth.getBalance(address);

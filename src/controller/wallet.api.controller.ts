@@ -9,8 +9,12 @@ import {
 import * as walletService from "../services";
 import {
   PkRecoveryResponse,
+  TransactionSignResponse,
   WalletCreateSuccessResponse,
 } from "../message/wallet.api.response";
+import { ErrorResponse } from "../message/api.reponse";
+
+import { ApiStatus } from "../types/enums/api.status";
 
 export const createWallet = async (
   req: ExpressRequest,
@@ -63,5 +67,23 @@ export const recoverPk = async (req: ExpressRequest, res: ExpressResponse) => {
   // 이해가 안가면 app.ts 파일에 적혀있는 예시 PrivateKey가 어떻게 동작하는지 확인하면 된다.
 
   const response = new PkRecoveryResponse(privateKey);
+  return response.send(res);
+};
+
+/**
+ * @description Transaction을 서명하는 controller
+ * @param req
+ * @param res
+ * @returns
+ */
+
+export const signTransaction = async (
+  req: ExpressRequest,
+  res: ExpressResponse
+) => {
+  const receipt = await walletService.signAndSendTransaction(req);
+  console.log("Tx Receipt: ", receipt);
+
+  const response = new TransactionSignResponse(JSON.stringify(receipt));
   return response.send(res);
 };
