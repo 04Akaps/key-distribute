@@ -38,15 +38,13 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
   // 예를들어 2, 3을 입력하면
   // secret를 3개의 조각으로 나누고, 이 중 2개의 조각만 있으면 복호화 가능하게 구성 됨
 
-  const encrypShares = shareArray.map((share) => {
+  const encrypShares = shareArray.map((share, i) => {
     // 해당 값은 배열로 나오기 떄문에 각각의 값에 대해서 PBKDF2를 사용하여 직렬화 실행
-
     const iv = crypto.randomBytes(16); // 랜덤 값 생성
 
     // 해당 값을 암호화
     // PBKDF2는 입력된 값에 대해서 여러번 반복해서 보안성이 높은 키를 생성
     // createCipheriv는 키, 알고리즘, 랜덤 값을 통해서 인스턴스를 생성
-
     const ci = crypto.createCipheriv(
       "aes-256-cbc",
       crypto.pbkdf2Sync(PASSWORD, SALT, ITERATIONS, KEYLEN, DIGEST),
@@ -55,7 +53,6 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
 
     // 암호화를 수행
     let encrypt = ci.update(share, "utf8", "hex"); //utf8로 인코딩 하고, 16진수 문자열로 바꿔주며 암호화를 진행
-
     encrypt += ci.final("hex"); // 이후, 해당 값을 hex값으로 변환
 
     return {
@@ -83,8 +80,8 @@ export const distributeAndEncryptoKey = async (privateKey: string) => {
 
   const newMaterial = [...parseOne, ...parseTwo];
 
+  // 테스트 용 -> 제거 필요
   decryptAndRestoreKey(JSON.stringify(newMaterial));
-
   return stringFyMaterial;
 };
 
@@ -101,7 +98,6 @@ export const decryptAndRestoreKey = async (source: string) => {
     );
 
     let decrypted = decipher.update(share.encrypShares, "hex", "utf8");
-
     decrypted += decipher.final("utf8");
 
     return decrypted;
